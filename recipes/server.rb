@@ -37,7 +37,6 @@ servicewrapper_file         = node['elasticsearch']['servicewrapper_file']
 servicewrapper_checksum     = node['elasticsearch']['servicewrapper_checksum']
 
 include_recipe "java"
-#include_recipe "logrotate"
 
 group server_group do
   system true

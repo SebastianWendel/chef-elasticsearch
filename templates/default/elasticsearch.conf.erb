@@ -1,4 +1,4 @@
-set.default.ES_HOME=<Path to ElasticSearch Home>
+set.default.ES_HOME=<%= node['elasticsearch']['server_path'] %>
 set.default.ES_HEAP_SIZE=1024
 
 #********************************************************************
@@ -68,7 +68,7 @@ wrapper.console.format=PM
 wrapper.console.loglevel=INFO
 
 # Log file to use for wrapper output logging.
-wrapper.logfile=%ES_HOME%/logs/service.log
+wrapper.logfile=<%= node['elasticsearch']['server_logs'] %>/service.log
 
 # Format of output for the log file.  (See docs for formats)
 wrapper.logfile.format=LPTM

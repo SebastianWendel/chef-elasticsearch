@@ -35,6 +35,8 @@ default['elasticsearch']['servicewrapper_checksum'] = "8d2f46993dec203e23bbb5d16
 # SERVER CONFIG
 default['elasticsearch']['server_path'] = "/usr/share/elasticsearch"
 default['elasticsearch']['server_etc'] = "/etc/elasticsearch"
+default['elasticsearch']['server_pid'] = "/var/run/elasticsearch"
+default['elasticsearch']['server_lock'] = "/var/lock/elasticsearch"
 default['elasticsearch']['server_logs'] = "/var/log/elasticsearch"
 default['elasticsearch']['server_data'] = "/var/elasticsearch"
 default['elasticsearch']['server_plugins'] = "#{node['elasticsearch']['server_path']}/plugins"

@@ -25,9 +25,11 @@ server_file                 = node['elasticsearch']['server_file']
 server_checksum             = node['elasticsearch']['server_checksum']
 server_path                 = node['elasticsearch']['server_path']
 server_etc                  = node['elasticsearch']['server_etc']
+server_pid                  = node['elasticsearch']['server_pid']
+server_lock                 = node['elasticsearch']['server_lock']
 server_plugins              = node['elasticsearch']['server_plugins']
 server_logs                 = node['elasticsearch']['server_logs']
-server_data                 = node['elasticsearch']['server_data']                                   
+server_data                 = node['elasticsearch']['server_data']
 servicewrapper_path         = node['elasticsearch']['servicewrapper_path']
 servicewrapper_download     = node['elasticsearch']['servicewrapper_download']
 servicewrapper_version      = node['elasticsearch']['servicewrapper_version']
@@ -56,7 +58,7 @@ end
   end
 end
 
-[server_data, server_logs].each do |folder|
+[server_pid, server_lock, server_data, server_logs].each do |folder|
   directory folder do
     owner server_user
     group server_group
@@ -99,10 +101,30 @@ unless FileTest.exists?("#{server_path}/service/elasticsearch")
   end
 end
 
-unless FileTest.exists?("/etc/init.d/elasticsearch")
- link "/etc/init.d/elasticsearch" do
-    to "#{server_path}/bin/service/elasticsearch"
-  end
+template "/etc/init.d/elasticsearch" do
+  source "elasticsearch-init.erb"
+  owner "root"
+  group "root"
+  mode 0755
+end
+
+link "#{server_path}/config" do
+  to server_etc
+end
+
+link "#{server_path}/logs" do
+  to server_logs
+end
+
+link "#{server_path}/data" do
+  to server_data
+end
+
+template "#{server_etc}/elasticsearch.conf" do
+  source "elasticsearch.conf.erb"
+  owner "root"
+  group "root"
+  mode 0644
 end
 
 template "#{server_etc}/elasticsearch.yml" do
@@ -112,13 +134,19 @@ template "#{server_etc}/elasticsearch.yml" do
   mode 0644
 end
 
-=begin
+template "#{server_etc}/logging.yml" do
+  source "logging.yml.erb"
+  owner "root"
+  group "root"
+  mode 0644
+end
 
-# RELOAD APACHE FOR CONFIG CHANGES
 service "elasticsearch" do
-  supports :restart => true, :status => true, :reload => true
+  supports :restart => true, :status => true
   action [:enable, :start]
 end
+
+=begin
 
 # NOTIFICATION FOR THE FINISHED INSTALLATION
 log "elasticsearch servicewrapper-Interface s successfully installed and configured." do

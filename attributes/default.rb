@@ -32,18 +32,21 @@ default['elasticsearch']['servicewrapper_file'] = "elasticsearch-elasticsearch-s
 default['elasticsearch']['servicewrapper_download'] = "#{node['elasticsearch']['servicewrapper_url']}/elasticsearch-servicewrapper/tarball/master"
 default['elasticsearch']['servicewrapper_checksum'] = "8d2f46993dec203e23bbb5d16b90898a15761c7906feb466436858c91ae93c31"
 
+# SERVER PLUGINS
+default['elasticsearch']['plugins'] = "lukas-vlcek/bigdesk, Aconex/elasticsearch-head"
+
 # SERVER CONFIG
 default['elasticsearch']['server_path'] = "/usr/share/elasticsearch"
 default['elasticsearch']['server_etc'] = "/etc/elasticsearch"
 default['elasticsearch']['server_pid'] = "/var/run/elasticsearch"
 default['elasticsearch']['server_lock'] = "/var/lock/elasticsearch"
 default['elasticsearch']['server_logs'] = "/var/log/elasticsearch"
-default['elasticsearch']['server_data'] = "/var/elasticsearch"
+default['elasticsearch']['server_data'] = "/var/lib/elasticsearch"
 default['elasticsearch']['server_plugins'] = "#{node['elasticsearch']['server_path']}/plugins"
 default['elasticsearch']['server_user'] = "elasticsearch"
 default['elasticsearch']['server_group'] = "elasticsearch"
+default['elasticsearch']['server_ulimit'] = 64000
 default['elasticsearch']['clustername'] = "elasticsearch"
-default['elasticsearch']['plugins'] = nil
 default['elasticsearch']['number_shards'] = 5
 default['elasticsearch']['number_replicas'] = 1 
 default['elasticsearch']['bind_host'] = "0.0.0.0"

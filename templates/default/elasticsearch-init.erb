@@ -88,7 +88,7 @@ RUN_AS_USER=<%= node['elasticsearch']['server_user'] %>
 
 # Specify the number of open files ulimit for the above user
 # recommended value: 32000
-#ULIMIT_N=
+ULIMIT_N=<%= node['elasticsearch']['server_ulimit'] %>
 
 # By default we show a detailed usage block.  Uncomment to show brief usage.
 #BRIEF_USAGE=true

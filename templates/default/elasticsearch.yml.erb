@@ -9,7 +9,6 @@
 
 cluster.name: <%= node['elasticsearch']['clustername'] %>
 
-
 #################################### Node #####################################
 
 node.name: <%= node['fqdn'] %>
@@ -28,7 +27,7 @@ path.plugins: <%= node['elasticsearch']['server_plugins'] %>
 <% if node['elasticsearch']['plugins'] %>
 #################################### Plugin ###################################
 
-plugin.mandatory: <%= node['elasticsearch']['plugins'] %>
+# plugin.mandatory: <%= node['elasticsearch']['plugins'] %>
 
 <% end %>
 ################################### Memory ####################################

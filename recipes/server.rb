@@ -35,6 +35,7 @@ servicewrapper_download     = node['elasticsearch']['servicewrapper_download']
 servicewrapper_version      = node['elasticsearch']['servicewrapper_version']
 servicewrapper_file         = node['elasticsearch']['servicewrapper_file']
 servicewrapper_checksum     = node['elasticsearch']['servicewrapper_checksum']
+plugins                     = node['elasticsearch']['plugins']
 
 include_recipe "java"
 
@@ -45,7 +46,7 @@ end
 user server_user do
   home server_data
   gid server_group
-  system true
+  #system true
   shell "/bin/bash"
 end
 
@@ -119,6 +120,10 @@ link "#{server_path}/data" do
   to server_data
 end
 
+link "/usr/bin/elasticsearch-plugins" do
+  to "#{server_path}/bin/plugin"
+end
+
 template "#{server_etc}/elasticsearch.conf" do
   source "elasticsearch.conf.erb"
   owner "root"
@@ -140,16 +145,21 @@ template "#{server_etc}/logging.yml" do
   mode 0644
 end
 
+ruby_block "install elasticsearch plugins" do
+  block do
+    plugins.split(',').each do |plugin_url|
+      plugin_name = plugin_url.split('/').last.split('-').last
+      plugins_installed = Dir.foreach(server_plugins)
+      unless plugins_installed.any? { |plugins_any| plugins_any.include?("#{plugin_name}") }
+        Chef::Log.info("install plugin #{plugin_name}")
+        cmd = Chef::ShellOut.new(%Q[ #{server_path}/bin/plugin -install #{plugin_url} ]).run_command
+      end
+    end
+  end
+  action :create
+end
+
 service "elasticsearch" do
   supports :restart => true, :status => true
   action [:enable, :start]
 end
-
-=begin
-
-# NOTIFICATION FOR THE FINISHED INSTALLATION
-log "elasticsearch servicewrapper-Interface s successfully installed and configured." do
-  action :nothing
-end
-
-=end

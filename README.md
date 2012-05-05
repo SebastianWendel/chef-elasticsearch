@@ -6,40 +6,43 @@ Uses the stable release provided as tar.gz from github and the recommended java 
 # Requirements #
 
 ## Platform ##
-The Cookbooks is Tested on following platforms:
+The Cookbooks is tested on following platforms:
 * Debian, Ubuntu
 * CentOS, Red Hat
 
 ## Cookbooks ##
-The following Opscode cookbooks are dependencies:
+The following Opscode cookbook is needed:
 * java
 
 # Recipes #
 Just include the elasticsearch cookbock in your runlist or server role with the following hash table:
 
+<pre><code>
   {
     "run_list": [
       "recipe[elasticsearch]"
     ]
   }
+</code></pre>
 
-This will install the elasticsearch server, the java dependencies and the plugins.
+This will install the elasticsearch server, the java dependencie and the declared plugins.
 
 # Attributes #
 ## Defaults ##
-* `node['elasticsearch']['server_version']` - the version you whant to install, like "0.19.3".
-* `node['elasticsearch']['server_checksum']` - the sha256 of binery tar.gz from github.
-* `node['elasticsearch']['clustername']` - the name of the cluster if you whant to seaperate them, default is "elasticsearch".
+* `node['elasticsearch']['server_version']` - the version you want to install, like "0.19.3".
+* `node['elasticsearch']['server_checksum']` - the sha256 checksum of binery tar.gz from github.
+* `node['elasticsearch']['clustername']` - the name of the cluster if you want to separate them, default is "elasticsearch".
 * `node['elasticsearch']['number_shards']` - set the active shards that are available, default is "5".
-* `node['elasticsearch']['number_replicas']` - set the number of replicasthat are available, default is "1".
-* `node['elasticsearch']['mem_heap']` - set java heap size in megabyte , the default will calculate 2/3 of avalable system memory.
-* `node['elasticsearch']['mem_mlock']` - set mlockall to lock all available memory, default is "true".
+* `node['elasticsearch']['number_replicas']` - set the number of replicas that are available, default is "1".
+* `node['elasticsearch']['mem_heap']` - set java heap size in megabyte , the default will calculate 2/3 of available system memory.
+* `node['elasticsearch']['mem_mlock']` - set mlockall to lock all available heap memory, default is "true".
 
 ## Plugins  ##
 
-* `node['elasticsearch']['plugins']` - provide a comma seperated list includin github name and projekt like the following defaults "lukas-vlcek/bigdesk, Aconex/elasticsearch-head"
+* `node['elasticsearch']['plugins']` - provide a comma separated list including github and projekt name, like the following defaults "lukas-vlcek/bigdesk, Aconex/elasticsearch-head"
+
 For more infromation on elasticsearch plugins go to:
-* http://www.elasticsearch.org/guide/reference/modules/plugins.html
+http://www.elasticsearch.org/guide/reference/modules/plugins.html
 
 # Usage #
 Simply include the recipe where you want elasticsearch installed.
@@ -50,6 +53,7 @@ Have a lock at the github issues section. There's still some work to do, patches
 # License and Author #
 
 Author Sebastian Wendel (<packages@sourceindex.de>)
+
 Copyright 2012, SourceIndex IT-Serives
 
 Licensed under the Apache License, Version 2.0 (the "License");

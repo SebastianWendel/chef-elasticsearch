@@ -1,41 +1,55 @@
-## Description ##
+# Description #
+Installs elasticsearch the painless JSON over HTTP enabled search server, who is always available and built for the cloud.
 
-## Dependencies ##
+Uses the stable release provided as tar.gz from github and the recommended java service-wrapper. The cookbook also provides the Plugin installation.
 
-bin/plugin -install sonian/elasticsearch-jetty
-bin/plugin -install Aconex/elasticsearch-head
-bin/plugin -install lukas-vlcek/bigdesk
-bin/plugin -install richardwilly98/elasticsearch-river-mongodb
-bin/plugin -install dadoonet/rssriver
-bin/plugin -install elasticsearch/elasticsearch-river-rabbitmq
-bin/plugin -install elasticsearch/elasticsearch-river-twitter
-bin/plugin -install elasticsearch/elasticsearch-river-wikipedia
-bin/plugin -install elasticsearch/elasticsearch-river-couchdb
+# Requirements #
 
-https://raw.github.com/sonian/elasticsearch-jetty/master/config/jetty.xml
-https://raw.github.com/sonian/elasticsearch-jetty/master/config/logging.yml
-https://raw.github.com/sonian/elasticsearch-jetty/master/config/jetty-minimal.xml
-https://raw.github.com/sonian/elasticsearch-jetty/master/config/elasticsearch.yml
+## Platform ##
+The Cookbooks is Tested on following platforms:
+* Debian, Ubuntu
+* CentOS, Red Hat
 
-vagrant@ubuntu10044:/usr/local/elasticsearch/current$ ll config/            
--rw-r--r-- 1 elasticsearch elasticsearch 12352 2012-04-29 23:33 elasticsearch.yml
--rw-r--r-- 1 elasticsearch elasticsearch  1036 2012-04-29 23:33 logging.yml
+## Cookbooks ##
+The following Opscode cookbooks are dependencies:
+* java
 
-https://github.com/coroutine/chef-elasticsearch/blob/master/attributes/default.rb
+# Recipes #
+Just include the elasticsearch cookbock in your runlist or server role with the following hash table:
 
-WRAPPER_CONF="$ES_HOME/bin/service/elasticsearch.conf"
+  {
+    "run_list": [
+      "recipe[elasticsearch]"
+    ]
+  }
 
+This will install the elasticsearch server, the java dependencies and the plugins.
 
-### Recipes ###
+# Attributes #
+## Defaults ##
+* `node['elasticsearch']['server_version']` - the version you whant to install, like "0.19.3".
+* `node['elasticsearch']['server_checksum']` - the sha256 of binery tar.gz from github.
+* `node['elasticsearch']['clustername']` - the name of the cluster if you whant to seaperate them, default is "elasticsearch".
+* `node['elasticsearch']['number_shards']` - set the active shards that are available, default is "5".
+* `node['elasticsearch']['number_replicas']` - set the number of replicasthat are available, default is "1".
+* `node['elasticsearch']['mem_heap']` - set java heap size in megabyte , the default will calculate 2/3 of avalable system memory.
+* `node['elasticsearch']['mem_mlock']` - set mlockall to lock all available memory, default is "true".
 
-### default ###
+## Plugins  ##
 
-## Usage ##
+* `node['elasticsearch']['plugins']` - provide a comma seperated list includin github name and projekt like the following defaults "lukas-vlcek/bigdesk, Aconex/elasticsearch-head"
+For more infromation on elasticsearch plugins go to:
+* http://www.elasticsearch.org/guide/reference/modules/plugins.html
 
-## License and Author ##
+# Usage #
+Simply include the recipe where you want elasticsearch installed.
 
-Author:: Sebastian Wendel
+# ToDos and Issues #
+Have a lock at the github issues section. There's still some work to do, patches are welcome.
 
+# License and Author #
+
+Author Sebastian Wendel (<packages@sourceindex.de>)
 Copyright 2012, SourceIndex IT-Serives
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -49,4 +63,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-

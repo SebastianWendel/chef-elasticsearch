@@ -1,5 +1,5 @@
 set.default.ES_HOME=<%= node['elasticsearch']['server_path'] %>
-set.default.ES_HEAP_SIZE=1024
+set.default.ES_HEAP_SIZE=<%= node['elasticsearch']['mem_heap'] %>
 
 #********************************************************************
 # Wrapper Timeout Properties

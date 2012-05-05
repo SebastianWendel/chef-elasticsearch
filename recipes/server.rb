@@ -151,7 +151,7 @@ ruby_block "install elasticsearch plugins" do
       plugin_name = plugin_url.split('/').last.split('-').last
       plugins_installed = Dir.foreach(server_plugins)
       unless plugins_installed.any? { |plugins_any| plugins_any.include?("#{plugin_name}") }
-        Chef::Log.info("install plugin #{plugin_name}")
+        Chef::Log.info("install elasticsearch plugin #{plugin_url}")
         cmd = Chef::ShellOut.new(%Q[ #{server_path}/bin/plugin -install #{plugin_url} ]).run_command
       end
     end

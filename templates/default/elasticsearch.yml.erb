@@ -32,7 +32,7 @@ path.plugins: <%= node['elasticsearch']['server_plugins'] %>
 <% end %>
 ################################### Memory ####################################
 
-bootstrap.mlockall: true
+bootstrap.mlockall: <%= node['elasticsearch']['mem_mlock'] %>
 
 ############################## Network And HTTP ###############################
 

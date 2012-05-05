@@ -54,4 +54,6 @@ default['elasticsearch']['publish_host'] = nil
 default['elasticsearch']['port_tcp'] = nil
 default['elasticsearch']['port_http'] = nil
 default['elasticsearch']['http_disable'] = false
+default['elasticsearch']['mem_mlock'] = true
+default['elasticsearch']['mem_heap'] = "#{(node['memory']['total'].to_i - (node['memory']['total'].to_i/3) ) / 1024}m"
 

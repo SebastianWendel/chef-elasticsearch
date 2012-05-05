@@ -3,6 +3,8 @@ Installs elasticsearch the painless JSON over HTTP enabled search server, who is
 
 Uses the stable release provided as tar.gz from github and the recommended java service-wrapper. The cookbook also provides the Plugin installation.
 
+http://www.elasticsearch.org/
+
 # Requirements #
 
 ## Platform ##
@@ -23,7 +25,7 @@ Just include the elasticsearch cookbock in your runlist or server role with the 
       ]
     }
 
-This will install the elasticsearch server, the java dependencie and the declared plugins.
+This will install the java dependencie, the elasticsearch server and the declared plugins.
 
 # Attributes #
 ## Defaults ##
@@ -36,8 +38,13 @@ This will install the elasticsearch server, the java dependencie and the declare
 * `node['elasticsearch']['mem_mlock']` - set mlockall to lock all available heap memory, default is "true".
 
 ## Plugins  ##
+For installing elasticsearch plugins just add it in the following way:
 
 * `node['elasticsearch']['plugins']` - provide a comma separated list including github and projekt name, like the following defaults "lukas-vlcek/bigdesk, Aconex/elasticsearch-head"
+
+You can also use the link to install a plugin:
+
+    sudo elasticsearch-plugins -install elasticsearch/elasticsearch-river-couchdb
 
 For more infromation on elasticsearch plugins go to:
 
@@ -51,9 +58,9 @@ Have a lock at the github issues section. There's still some work to do, patches
 
 # License and Author #
 
-Author:: Sebastian Wendel, (<packages@sourceindex.de>)
+Author: Sebastian Wendel, (<packages@sourceindex.de>)
 
-Copyright:: 2012, SourceIndex IT-Serives
+Copyright: 2012, SourceIndex IT-Serives
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

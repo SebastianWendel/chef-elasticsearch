@@ -16,6 +16,21 @@ The Cookbooks is tested on following platforms:
 The following Opscode cookbook is needed:
 * java
 
+To install the dependencie use the following commands:
+
+    gem install librarian                                                                                                   
+    cd chef-repo
+    librarian-chef init
+
+    cat >> Cheffile <<END_OF_CHEFFILE
+    cookbook 'java', :git => 'https://github.com/opscode-cookbooks/java.git'
+    cookbook 'elasticsearch', :git => 'https://github.com/sebwendel/chef-elasticsearch.git'
+    END_OF_CHEFFILE
+
+    librarian-chef installe
+
+    knife cookbook upload java elasticsearch
+
 # Recipes #
 Just include the elasticsearch cookbock in your runlist or server role with the following hash table:
 
@@ -38,7 +53,7 @@ This will install the java dependencie, the elasticsearch server and the declare
 * `node['elasticsearch']['mem_mlock']` - set mlockall to lock all available heap memory, default is "true".
 
 ## Plugins  ##
-For installing elasticsearch plugins just add it in the following way:
+For preinstalled elasticsearch plugins just add it in the following way:
 
 * `node['elasticsearch']['plugins']` - provide a comma separated list including github and projekt name, like the following defaults "lukas-vlcek/bigdesk, Aconex/elasticsearch-head"
 
@@ -49,6 +64,11 @@ You can also use the link to install a plugin:
 For more infromation on elasticsearch plugins go to:
 
 http://www.elasticsearch.org/guide/reference/modules/plugins.html
+
+You can access the the pre installed plugins by the following url:
+
+http://NODE_IP:9200/_plugin/head/
+http://NODE_IP:9200/_plugin/bigdesk/
 
 # Usage #
 Simply include the recipe where you want elasticsearch installed.

@@ -18,4 +18,4 @@
 #
 
 # Install the elasticsearch server component by default
-include_recipe "elasticsearch::server"
+include_recipe  "elasticsearch::server"

@@ -16,7 +16,7 @@ The Cookbooks is tested on following platforms:
 The following Opscode cookbook is needed:
 * java
 
-To install the dependencie use the following commands:
+To install the dependency use the following commands:
 
     gem install librarian                                                                                                   
     cd chef-repo
@@ -27,7 +27,7 @@ To install the dependencie use the following commands:
     cookbook 'elasticsearch', :git => 'https://github.com/sebwendel/chef-elasticsearch.git'
     END_OF_CHEFFILE
 
-    librarian-chef installe
+    librarian-chef install
 
     knife cookbook upload java elasticsearch
 
@@ -68,6 +68,7 @@ http://www.elasticsearch.org/guide/reference/modules/plugins.html
 You can access the the pre installed plugins by the following url:
 
 http://NODE_IP:9200/_plugin/head/
+
 http://NODE_IP:9200/_plugin/bigdesk/
 
 # Usage #

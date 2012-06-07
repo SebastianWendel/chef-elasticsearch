@@ -19,7 +19,7 @@
 #
 
 # SERVER BINARY
-default['elasticsearch']['server_version'] = "0.19.3"
+default['elasticsearch']['server_version'] = "0.19.4"
 default['elasticsearch']['server_url'] = "https://github.com/downloads/elasticsearch"
 default['elasticsearch']['server_file'] = "elasticsearch-#{node['elasticsearch']['server_version']}.tar.gz"
 default['elasticsearch']['server_download'] = "#{node['elasticsearch']['server_url']}/elasticsearch/#{node['elasticsearch']['server_file']}"

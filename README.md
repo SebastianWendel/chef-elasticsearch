@@ -63,13 +63,13 @@ You can also use the link to install a plugin:
 
 For more infromation on elasticsearch plugins go to:
 
-http://www.elasticsearch.org/guide/reference/modules/plugins.html
+<http://www.elasticsearch.org/guide/reference/modules/plugins.html>
 
 You can access the the pre installed plugins by the following url:
 
-http://NODE_IP:9200/_plugin/head/
+<http://NODE_IP:9200/_plugin/head/>
 
-http://NODE_IP:9200/_plugin/bigdesk/
+<http://NODE_IP:9200/_plugin/bigdesk/>
 
 # Usage #
 Simply include the recipe where you want elasticsearch installed.

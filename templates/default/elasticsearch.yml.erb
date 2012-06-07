@@ -41,11 +41,13 @@ bootstrap.mlockall: <%= node['elasticsearch']['mem_mlock'] %>
 
 ############################## Network And HTTP ###############################
 
+<% if node['elasticsearch']['bind_host'] && node['elasticsearch']['publish_host'] %>
 network.bind_host: <%= node['elasticsearch']['bind_host'] %> 
-<% if node['elasticsearch']['publish_host'] %>
 network.publish_host: <%= node['elasticsearch']['publish_host'] %>
-network.host: <%= node['elasticsearch']['publish_host'] %>
+<% else %>
+network.host: <%= node['elasticsearch']['host'] %>
 <% end %>
+
 <% if node['elasticsearch']['port_tcp'] %>
 transport.tcp.port: <%= node['elasticsearch']['port_tcp'] %>
 <% end %>
@@ -55,7 +57,6 @@ http.port: <%= node['elasticsearch']['port_http'] %>
 <% if node['elasticsearch']['http_disable']  %>
 http.enabled: false
 <% end %>
-
 
 # Enable compression for all communication between nodes (disabled by default):
 #

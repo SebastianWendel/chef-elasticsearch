@@ -43,14 +43,32 @@ Just include the elasticsearch cookbock in your runlist or server role with the 
 This will install the java dependencie, the elasticsearch server and the declared plugins.
 
 # Attributes #
-## Defaults ##
+
+## Version ##
 * `node['elasticsearch']['server_version']` - the version you want to install, like "0.19.3".
 * `node['elasticsearch']['server_checksum']` - the sha256 checksum of binery tar.gz from github.
+
+## Cluster ##
 * `node['elasticsearch']['clustername']` - the name of the cluster if you want to separate them, default is "elasticsearch".
+
+## Ressources ##
 * `node['elasticsearch']['number_shards']` - set the active shards that are available, default is "5".
 * `node['elasticsearch']['number_replicas']` - set the number of replicas that are available, default is "1".
 * `node['elasticsearch']['mem_heap']` - set java heap size in megabyte , the default will calculate 2/3 of available system memory.
 * `node['elasticsearch']['mem_mlock']` - set mlockall to lock all available heap memory, default is "true".
+
+## Network ##
+To configure the default interfase where both services should listen change the following attribure. The default, will be any LocalAddress typically '0.0.0.0' or '::0'.
+* `node['elasticsearch']['host']` - set the host communication interface, default is "0.0.0.0". 
+
+If you want to spread the elasticsearch listener on two interfaces set the two following attributes. 
+* `node['elasticsearch']['bind_host']` - set the node communication interface, default is "nil". 
+* `node['elasticsearch']['publish_host']` - set the cluster communication interface, default is "nil". 
+
+You can also specify logical setting values like "_eth1_" or "_eth1:ipv4_".
+
+For more detailed Information have a look to the following document:
+<http://www.elasticsearch.org/guide/reference/modules/network.html>
 
 ## Plugins  ##
 For preinstalled elasticsearch plugins just add it in the following way:

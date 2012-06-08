@@ -70,7 +70,7 @@ You can also specify logical setting values like "_eth1_" or "_eth1:ipv4_".
 For more detailed Information have a look to the following document:
 <http://www.elasticsearch.org/guide/reference/modules/network.html>
 
-## Plugins  ##
+# Plugins #
 For preinstalled elasticsearch plugins just add it in the following way:
 
 * `node['elasticsearch']['plugins']` - provide a comma separated list including github and projekt name, like the following defaults "lukas-vlcek/bigdesk, Aconex/elasticsearch-head"
@@ -85,9 +85,10 @@ For more infromation on elasticsearch plugins go to:
 
 You can access the the pre installed plugins by the following url:
 
-<http://NODE_IP:9200/_plugin/head/>
+* <http://0.0.0.0:9200/_plugin/head/>
+* <http://0.0.0.0:9200/_plugin/bigdesk/>
 
-<http://NODE_IP:9200/_plugin/bigdesk/>
+# Jetty #
 
 # Usage #
 Simply include the recipe where you want elasticsearch installed.

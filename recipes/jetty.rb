@@ -30,7 +30,13 @@ include_recipe  "elasticsearch::server"
 
 template "#{server_etc}/jetty.xml" do
   source "jetty.xml.erb"
-  #source "jetty-minimal.xml.erb"
+  owner "root"
+  group "root"
+  mode 0644
+end
+
+template "#{server_etc}/jetty-ssl.xml" do
+  source "jetty-ssl.xml.erb"
   owner "root"
   group "root"
   mode 0644
@@ -38,6 +44,13 @@ end
 
 template "#{server_etc}/elasticsearch.yml" do
   source "elasticsearch-jetty.yml.erb"
+  owner "root"
+  group "root"
+  mode 0644
+end
+
+template "#{server_etc}/realm.properties" do
+  source "realm.properties.erb"
   owner "root"
   group "root"
   mode 0644

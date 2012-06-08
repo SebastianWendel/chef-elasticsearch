@@ -38,7 +38,7 @@ Just include the elasticsearch cookbock in your runlist or server role with the 
 
 This will install the java dependencie, the elasticsearch server and the declared plugins.
 
-* `recipe[elasticsearch::jetty]` - install elasticsearch with jetty http plugin
+* `recipe[elasticsearch::jetty]` - install elasticsearch with jetty http plugin and configs
 
 Please note that you have a dependency on the versions you use. The jetty plugin and elesticsearch server have to be the exact same versions.
 

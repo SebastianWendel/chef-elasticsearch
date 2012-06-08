@@ -10,8 +10,7 @@ See GIT repository for detailed source history
 
 ### Functionality Added or Changed ###
 
-2012-06-07  Sebastian Wendel  packages@sourceindex.de 
-
-* [GITHUB#4] - network interface config
+* 2012-06-07  Sebastian Wendel [GITHUB#4] - network interface config
+* 2012-06-08  Sebastian Wendel [GITHUB#5] - jetty implementation for authentication
 
 ### Bugs Fixed ###

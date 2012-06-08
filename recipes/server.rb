@@ -160,6 +160,6 @@ ruby_block "install elasticsearch plugins" do
 end
 
 service "elasticsearch" do
-  supports :restart => true, :status => true
+  supports :start => true, :stop => true, :restart => true, :status => true
   action [:enable, :start]
 end

@@ -34,13 +34,13 @@ To install the dependency use the following commands:
 # Recipes #
 Just include the elasticsearch cookbock in your runlist or server role with the following hash table:
 
-    {
-      "run_list": [
-        "recipe[elasticsearch]"
-      ]
-    }
+* `recipe[elasticsearch]` - the default recipe to install elasticsearch
 
 This will install the java dependencie, the elasticsearch server and the declared plugins.
+
+* `recipe[elasticsearch::jetty]` - install elasticsearch with jetty http plugin
+
+Please note that you have a dependency on the versions you use. The jetty plugin and elesticsearch server have to be the exact same versions.
 
 # Attributes #
 
@@ -91,6 +91,12 @@ You can access the the pre installed plugins by the following url:
 
 # Usage #
 Simply include the recipe where you want elasticsearch installed.
+
+    {
+      "run_list": [
+        "recipe[elasticsearch]"
+      ]
+    }
 
 # ToDos and Issues #
 Have a lock at the github issues section. There's still some work to do, patches are welcome.

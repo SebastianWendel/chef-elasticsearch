@@ -25,8 +25,19 @@ es_jetty_version = node['elasticsearch']['es_jetty_version']
 
 include_recipe  "elasticsearch::server"
 
+# check if file exists? If not notifie and breckup
+# https://github.com/downloads/sonian/elasticsearch-jetty/elasticsearch-jetty-0.19.3.zip
+
 template "#{server_etc}/jetty.xml" do
   source "jetty.xml.erb"
+  #source "jetty-minimal.xml.erb"
+  owner "root"
+  group "root"
+  mode 0644
+end
+
+template "#{server_etc}/elasticsearch.yml" do
+  source "elasticsearch-jetty.yml.erb"
   owner "root"
   group "root"
   mode 0644
@@ -36,9 +47,13 @@ unless FileTest.exists?("#{server_plugins}/jetty")
   ruby_block "install jetty servlet container" do
     block do
       cmd = Chef::ShellOut.new(%Q[ #{server_path}/bin/plugin -install #{es_jetty_repo} ]).run_command
-      cmd = Chef::ShellOut.new(%Q[service elasticsearch restart]).run_command
       Chef::Log.info("installed the jetty servlet container")
     end
     action :create
+  end
+
+  service "elasticsearch" do
+    supports :start => true, :stop => true, :restart => true, :status => true
+    action [:restart]
   end
 end

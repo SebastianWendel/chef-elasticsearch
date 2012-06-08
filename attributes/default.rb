@@ -35,6 +35,10 @@ default['elasticsearch']['servicewrapper_checksum'] = "8d2f46993dec203e23bbb5d16
 # SERVER PLUGINS
 default['elasticsearch']['plugins'] = "lukas-vlcek/bigdesk, Aconex/elasticsearch-head"
 
+# JETTY CONFIG
+default['elasticsearch']['es_jetty_repo'] = "sonian/elasticsearch-jetty"
+default['elasticsearch']['es_jetty_version'] = "#{node['elasticsearch']['server_version']}"
+
 # SERVER CONFIG
 default['elasticsearch']['server_path'] = "/usr/share/elasticsearch"
 default['elasticsearch']['server_etc'] = "/etc/elasticsearch"

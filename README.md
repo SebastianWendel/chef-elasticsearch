@@ -71,7 +71,21 @@ For more detailed Information have a look to the following document:
 <http://www.elasticsearch.org/guide/reference/modules/network.html>
 
 # Plugins #
-For preinstalled elasticsearch plugins just add it in the following way:
+## Preinstalled Plugins##
+
+**ElasticHead:**
+
+<http://0.0.0.0:9200/_plugin/head/>
+
+**Bigdesk:**
+
+<http://0.0.0.0:9200/_plugin/bigdesk/>
+
+## Jetty ##
+
+## Installing ##
+
+For installing plugins during the deployment just add it in the following way:
 
 * `node['elasticsearch']['plugins']` - provide a comma separated list including github and projekt name, like the following defaults "lukas-vlcek/bigdesk, Aconex/elasticsearch-head"
 
@@ -84,11 +98,6 @@ For more infromation on elasticsearch plugins go to:
 <http://www.elasticsearch.org/guide/reference/modules/plugins.html>
 
 You can access the the pre installed plugins by the following url:
-
-* <http://0.0.0.0:9200/_plugin/head/>
-* <http://0.0.0.0:9200/_plugin/bigdesk/>
-
-# Jetty #
 
 # Usage #
 Simply include the recipe where you want elasticsearch installed.

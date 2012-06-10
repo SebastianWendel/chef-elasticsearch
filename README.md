@@ -102,7 +102,7 @@ For more infromation on elasticsearch plugins go to:
 You can access the the pre installed plugins by the following url:
 
 # Usage #
-Simply include the recipe where you want elasticsearch installed.
+Simply include the recipe where you want elasticsearch installed and maybe override some of the default attributes.
 
     {
       "run_list": [

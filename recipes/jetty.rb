@@ -17,26 +17,27 @@
 # limitations under the License.
 #
 
+server_version   = node['elasticsearch']['server_version']
 server_path      = node['elasticsearch']['server_path']
 server_etc       = node['elasticsearch']['server_etc']
 server_plugins   = node['elasticsearch']['server_plugins']
 es_jetty_repo    = node['elasticsearch']['es_jetty_repo']
-es_jetty_version = node['elasticsearch']['es_jetty_version']
 
 include_recipe  "elasticsearch::server"
 
-# check if file exists? If not notifie and breckup
-# https://github.com/downloads/sonian/elasticsearch-jetty/elasticsearch-jetty-0.19.3.zip
+ruby_block "Check if jetty plugin version is available." do
+  block do
+    require 'net/http'
+    uri = URI("http://cloud.github.com/downloads/#{es_jetty_repo}/elasticsearch-jetty-#{server_version}.zip")
+    res = Net::HTTP.get_response(uri)
+    unless res.code == "200"
+      Chef::Application.fatal!("The necessary jetty plugin version is not available and jetty will not be installed! Please read the cookbook section #recipes for a detailed description of the Problem.")
+    end
+  end
+end
 
 template "#{server_etc}/jetty.xml" do
   source "jetty.xml.erb"
-  owner "root"
-  group "root"
-  mode 0644
-end
-
-template "#{server_etc}/jetty-ssl.xml" do
-  source "jetty-ssl.xml.erb"
   owner "root"
   group "root"
   mode 0644

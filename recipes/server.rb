@@ -156,7 +156,6 @@ ruby_block "install elasticsearch plugins" do
       end
     end
   end
-  action :create
 end
 
 service "elasticsearch" do

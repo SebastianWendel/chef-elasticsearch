@@ -37,7 +37,6 @@ default['elasticsearch']['plugins'] = "lukas-vlcek/bigdesk, Aconex/elasticsearch
 
 # JETTY CONFIG
 default['elasticsearch']['es_jetty_repo'] = "sonian/elasticsearch-jetty"
-default['elasticsearch']['es_jetty_version'] = "#{node['elasticsearch']['server_version']}"
 
 # SERVER CONFIG
 default['elasticsearch']['server_path'] = "/usr/share/elasticsearch"

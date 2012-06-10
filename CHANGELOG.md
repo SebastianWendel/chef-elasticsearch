@@ -1,3 +1,5 @@
+#Chef-Elasticsearch Changelog#
+
 For release notes and other info pointers:
 
 <https://github.com/sebwendel/chef-elasticsearch/issues/>

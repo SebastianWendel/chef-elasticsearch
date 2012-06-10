@@ -75,13 +75,15 @@ For more detailed Information have a look to the following document:
 
 **ElasticHead:**
 
+Elasticsearch-head is a web front end for browsing and interacting with an Elastic Search cluster.
+
 <http://0.0.0.0:9200/_plugin/head/>
 
 **Bigdesk:**
 
-<http://0.0.0.0:9200/_plugin/bigdesk/>
+Live charts and statistics for ElasticSearch cluster.
 
-## Jetty ##
+<http://0.0.0.0:9200/_plugin/bigdesk/>
 
 ## Installing ##
 

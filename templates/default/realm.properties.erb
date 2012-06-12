@@ -1,2 +1,2 @@
-superuser: Adm1n,admin,readwrite
-user: Passw0rd,readwrite
+superuser: <%= node['elasticsearch']['jetty']['admin'] %>,admin,readwrite
+user: <%= node['elasticsearch']['jetty']['user'] %>,readwrite

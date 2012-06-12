@@ -32,7 +32,7 @@ To install the dependency use the following commands:
     knife cookbook upload java elasticsearch
 
 # Recipes #
-Just include the elasticsearch cookbock in your runlist or server role with the following hash table:
+Just include the elasticsearch cookbook in your runlist or server role with the following hash table:
 
 * `recipe[elasticsearch]` - the default recipe to install elasticsearch
 
@@ -43,6 +43,7 @@ This will install the java dependencie, the elasticsearch server and the declare
 Please note that you have a dependency on the versions you use. The jetty plugin and elesticsearch server have to be the exact same versions.
 
 # Attributes #
+All attributes are optional, you can override these setting to customize your setup.
 
 ## Version ##
 * `node['elasticsearch']['server_version']` - the version you want to install, like "0.19.3".
@@ -59,11 +60,11 @@ Please note that you have a dependency on the versions you use. The jetty plugin
 
 ## Network ##
 To configure the default interfase where both services should listen change the following attribure. The default, will be any LocalAddress typically '0.0.0.0' or '::0'.
-* `node['elasticsearch']['host']` - set the host communication interface, default is "0.0.0.0". 
+* `node['elasticsearch']['net_host']` - set the host communication interface, default is "0.0.0.0". 
 
 If you want to spread the elasticsearch listener on two interfaces set the two following attributes. 
-* `node['elasticsearch']['bind_host']` - set the node communication interface, default is "nil". 
-* `node['elasticsearch']['publish_host']` - set the cluster communication interface, default is "nil". 
+* `node['elasticsearch']['net_http']` - set the node communication interface, default is "nil". 
+* `node['elasticsearch']['net_transport']` - set the cluster communication interface, default is "nil". 
 
 You can also specify logical setting values like "_eth1_" or "_eth1:ipv4_".
 
@@ -102,6 +103,7 @@ For more infromation on elasticsearch plugins go to:
 You can access the the pre installed plugins by the following url:
 
 # Usage #
+## Default ##
 Simply include the recipe where you want elasticsearch installed and maybe override some of the default attributes.
 
     {
@@ -110,8 +112,24 @@ Simply include the recipe where you want elasticsearch installed and maybe overr
       ]
     }
 
+## Jetty ##
+If you wath to use elasticsearch with the jetty plugin you need to include the recepie and create the databag and the item for the login credentials.
+
+    cat > /tmp/jetty.json << 'EOF'
+    {
+      "id" : "jetty",
+      "jetty" : {
+        "admin" : "PASSWORD",
+        "user"  : "PASSWORD"
+      }
+    }
+    EOF
+
+    knife data bag create elasticsearch
+    knife data bag from file elasticsearch /tmp/jetty.json
+
 # ToDos and Issues #
-Have a lock at the github issues section. There's still some work to do, patches are welcome.
+Have a lock at the github issues section. There's some work to do, patches are welcome.
 
 # License and Author #
 

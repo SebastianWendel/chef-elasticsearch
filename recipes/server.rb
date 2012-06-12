@@ -46,7 +46,6 @@ end
 user server_user do
   home server_data
   gid server_group
-  #system true
   shell "/bin/bash"
 end
 
@@ -162,3 +161,4 @@ service "elasticsearch" do
   supports :start => true, :stop => true, :restart => true, :status => true
   action [:enable, :start]
 end
+

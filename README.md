@@ -113,7 +113,7 @@ Simply include the recipe where you want elasticsearch installed and maybe overr
     }
 
 ## Jetty ##
-If you wath to use elasticsearch with the jetty plugin you need to include the recepie and create the databag and the item for the login credentials.
+If you want to use elasticsearch with the jetty plugin you need to include the recepie and create the following databag and the item for the login credentials.
 
     cat > /tmp/jetty.json << 'EOF'
     {

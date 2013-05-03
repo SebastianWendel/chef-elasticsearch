@@ -18,18 +18,22 @@ The following Opscode cookbook is needed:
 
 To install the dependency use the following commands:
 
-    gem install librarian                                                                                                   
+    gem install berkshelf
+
     cd chef-repo
-    librarian-chef init
 
-    cat >> Cheffile <<END_OF_CHEFFILE
-    cookbook 'java', :git => 'https://github.com/opscode-cookbooks/java.git'
-    cookbook 'elasticsearch', :git => 'https://github.com/sebwendel/chef-elasticsearch.git'
-    END_OF_CHEFFILE
+    cat >> Berksfile <<EOF
+    site :opscode
+    metadata
 
-    librarian-chef install
+    cookbook 'java'
+    EOF
 
-    knife cookbook upload java elasticsearch
+    bundle install
+    berks install
+    berks upload
+
+For more information visit Berkshelf's Website at <http://berkshelf.com>
 
 # Recipes #
 Just include the elasticsearch cookbock in your runlist or server role with the following hash table:
@@ -44,8 +48,6 @@ This will install the java dependencie, the elasticsearch server and the declare
 
 # Attributes #
 ## Defaults ##
-* `node['elasticsearch']['server_version']` - the version you want to install, like "0.19.3".
-* `node['elasticsearch']['server_checksum']` - the sha256 checksum of binery tar.gz from github.
 * `node['elasticsearch']['clustername']` - the name of the cluster if you want to separate them, default is "elasticsearch".
 * `node['elasticsearch']['number_shards']` - set the active shards that are available, default is "5".
 * `node['elasticsearch']['number_replicas']` - set the number of replicas that are available, default is "1".
@@ -81,7 +83,7 @@ Have a lock at the github issues section. There's still some work to do, patches
 
 Author: Sebastian Wendel, (<packages@sourceindex.de>)
 
-Copyright: 2012, SourceIndex IT-Serives
+Copyright: 2013, SourceIndex IT-Serives
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

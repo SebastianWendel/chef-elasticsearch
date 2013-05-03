@@ -19,18 +19,10 @@
 #
 
 # SERVER BINARY
-default['elasticsearch']['server_version'] = "0.19.7"
-default['elasticsearch']['server_url'] = "https://github.com/downloads/elasticsearch"
-default['elasticsearch']['server_file'] = "elasticsearch-#{node['elasticsearch']['server_version']}.tar.gz"
-default['elasticsearch']['server_download'] = "#{node['elasticsearch']['server_url']}/elasticsearch/#{node['elasticsearch']['server_file']}"
-default['elasticsearch']['server_checksum'] = "2a4b0aa6853e6abc1328bc7107f80cd4dcdd4ef15e88ca4d44cb0c5f8560014e"
+default['elasticsearch']['server_url'] = "http://www.elasticsearch.org/download/"
 
 # SERVICE-WRAPPER BINARY
-default['elasticsearch']['servicewrapper_version'] = "d47d048"
-default['elasticsearch']['servicewrapper_url'] = "https://github.com/elasticsearch"
-default['elasticsearch']['servicewrapper_file'] = "elasticsearch-elasticsearch-servicewrapper-#{node['elasticsearch']['servicewrapper_version']}.tar.gz"
-default['elasticsearch']['servicewrapper_download'] = "#{node['elasticsearch']['servicewrapper_url']}/elasticsearch-servicewrapper/tarball/master"
-default['elasticsearch']['servicewrapper_checksum'] = "8d2f46993dec203e23bbb5d16b90898a15761c7906feb466436858c91ae93c31"
+default['elasticsearch']['servicewrapper_url'] = "https://github.com/elasticsearch/elasticsearch-servicewrapper/archive/master.zip"
 
 # SERVER PLUGINS
 default['elasticsearch']['plugins'] = "lukas-vlcek/bigdesk, Aconex/elasticsearch-head"

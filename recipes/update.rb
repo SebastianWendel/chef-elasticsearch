@@ -22,8 +22,8 @@ service "elasticsearch" do
 end
 
 directory node['elasticsearch']['server_path'] do
-    action :delete
     recursive true
+    action :delete
 end
 
 include_recipe "elasticsearch"

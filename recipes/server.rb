@@ -58,32 +58,26 @@ end
     end
 end
 
-unless FileTest.exists?("#{server_path}/bin/elasticsearch")
-    bash "download latest anddownload latest and  extract elasticsearch sources" do
+unless FileTest.exists?("#{server_path}/bin/plugin")
+    bash "download latest and extract elasticsearch sources" do
         cwd Chef::Config[:file_cache_path]
         code <<-EOH
             wget $(wget -qO- #{server_url} | grep -e download | grep '.tar.gz' | grep -v sha | grep -v 'RC' | cut -d'"' -f4)
             tar -zxf elasticsearch-*.tar.gz
-            rm -f elasticsearch-*.tar.gz
-            mv elasticsearch-*/* #{server_path}
-            chown -Rf root:root #{server_path}
-            rm -rf #{server_path}/config
+            cp -rf elasticsearch-*/bin elasticsearch-*/lib #{server_path}
+            rm -f elasticsearch-*.tar.*
         EOH
     end
 end
 
-unless FileTest.exists?("#{server_path}/service/elasticsearch")
-    remote_file "#{Chef::Config[:file_cache_path]}/master.zip" do
-        source servicewrapper_url
-        action :create_if_missing
-    end
-
+unless FileTest.exists?("#{server_path}/bin/service/elasticsearch")
     bash "extract elasticsearch service wrapper" do
         cwd Chef::Config[:file_cache_path]
         code <<-EOH
-            unzip master.zip
-            mv elasticsearch-servicewrapper-master/service #{server_path}/bin
-            chown -Rf root:root #{server_path}/bin/service
+            wget #{servicewrapper_url}
+            unzip -f master.zip
+            mv elasticsearch-servicewrapper-master/* #{server_path}/bin
+            rm -f master.zip
         EOH
     end
 end
@@ -116,6 +110,7 @@ template "#{server_etc}/elasticsearch.conf" do
     owner "root"
     group "root"
     mode 0644
+    notifies :restart, 'service[elasticsearch]'
 end
 
 template "#{server_etc}/elasticsearch.yml" do
@@ -123,6 +118,7 @@ template "#{server_etc}/elasticsearch.yml" do
     owner "root"
     group "root"
     mode 0644
+    notifies :restart, 'service[elasticsearch]'
 end
 
 template "#{server_etc}/logging.yml" do
@@ -130,6 +126,7 @@ template "#{server_etc}/logging.yml" do
     owner "root"
     group "root"
     mode 0644
+    notifies :restart, 'service[elasticsearch]'
 end
 
 ruby_block "install elasticsearch plugins" do

@@ -36,7 +36,7 @@ To install the dependency use the following commands:
 For more information visit Berkshelf's Website at <http://berkshelf.com>
 
 # Recipes #
-Just include the elasticsearch cookbock in your runlist or server role with the following hash table:
+Just include the elasticsearch cookbook in your runlist or server role with the following hash table:
 
     {
       "run_list": [

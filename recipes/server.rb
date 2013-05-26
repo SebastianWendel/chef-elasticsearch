@@ -74,8 +74,9 @@ unless FileTest.exists?("#{server_path}/bin/service/elasticsearch")
     bash "extract elasticsearch service wrapper" do
         cwd Chef::Config[:file_cache_path]
         code <<-EOH
+            rm -rf elasticsearch-servicewrapper-master
             wget #{servicewrapper_url}
-            unzip -f master.zip
+            unzip master.zip
             mv elasticsearch-servicewrapper-master/* #{server_path}/bin
             rm -f master.zip
         EOH

@@ -77,6 +77,7 @@ unless FileTest.exists?("#{server_path}/bin/service/elasticsearch")
             rm -rf elasticsearch-servicewrapper-master
             wget #{servicewrapper_url}
             unzip master.zip
+            rm -f elasticsearch-servicewrapper-master/README
             mv elasticsearch-servicewrapper-master/* #{server_path}/bin
             rm -f master.zip
         EOH

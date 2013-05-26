@@ -25,7 +25,7 @@ default['elasticsearch']['server_url'] = "http://www.elasticsearch.org/download/
 default['elasticsearch']['servicewrapper_url'] = "https://github.com/elasticsearch/elasticsearch-servicewrapper/archive/master.zip"
 
 # SERVER PLUGINS
-default['elasticsearch']['plugins'] = "lukas-vlcek/bigdesk, Aconex/elasticsearch-head"
+default['elasticsearch']['plugins'] = "lukas-vlcek/bigdesk, Aconex/elasticsearch-head, karmi/elasticsearch-paramedic"
 
 # SERVER CONFIG
 default['elasticsearch']['server_path'] = "/usr/share/elasticsearch"

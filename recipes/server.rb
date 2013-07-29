@@ -62,7 +62,8 @@ unless FileTest.exists?("#{server_path}/bin/plugin")
     bash "download latest and extract elasticsearch sources" do
         cwd Chef::Config[:file_cache_path]
         code <<-EOH
-            wget $(wget -qO- #{server_url} | grep -e download | grep '.tar.gz' | grep -v sha | grep -v 'RC' | cut -d'"' -f4)
+            #wget $(wget -qO- #{server_url} | grep -e download | grep '.tar.gz' | grep -v sha | grep -v 'RC' | cut -d'"' -f4)
+            wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.20.4.tar.gz
             tar -zxf elasticsearch-*.tar.gz
             cp -rf elasticsearch-*/bin elasticsearch-*/lib #{server_path}
             rm -f elasticsearch-*.tar.*
@@ -146,6 +147,6 @@ ruby_block "install elasticsearch plugins" do
 end
 
 service "elasticsearch" do
-    supports :restart => true, :status => true
+    supports :start => true, :status => true
     action [:enable, :start]
 end

@@ -135,8 +135,9 @@ http.enabled: false
 # Set this option to a higher value on a slow or congested network
 # to minimize discovery failures:
 #
-# discovery.zen.ping.timeout: 3s
-
+<% if node['elasticsearch']['discovery_timeout'] %>
+discovery.zen.ping.timeout: <%= node['elasticsearch']['discovery_timeout'] -%>s
+<% end %>
 # See <http://elasticsearch.org/guide/reference/modules/discovery/zen.html>
 # for more information.
 
